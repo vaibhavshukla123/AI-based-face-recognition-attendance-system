@@ -1,0 +1,84 @@
+{% extends 'attendance_sys/main.html' %}
+
+{% block content %}
+
+
+<div class="col-md-6" style="margin-top: 20px;">
+    <div class="card card-body">
+        <center><h3>Add Student</h3></center>
+        <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Enter First Name:</label>
+                        {{ studentForm.firstname }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Enter Last Name:</label>
+                        {{ studentForm.lastname }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">Enter Registration ID:</label>
+                        {{ studentForm.registration_id }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="sel1">Select Branch:</label>
+                        {{ studentForm.branch }}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="sel1">Select Year:</label>
+                        {{ studentForm.year }}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="sel1">Select Section:</label>
+                        {{ studentForm.section }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group" style="border: none;">
+                        <label class="control-label">Upload Profile Picture:</label>
+                        {{ studentForm.profile_pic }}
+                    </div>
+                {% comment %} <div>
+                    {%if student.profile_pic %} {% endcomment %}
+                    <h1>Test</h1>
+                    <img id="imagePreviewOne" thumbnail src=""/>
+                    {% comment %} <img src="{{student.profile_pic.url}}"> {% endcomment %}
+                    {% comment %} {%endif%} {% endcomment %}
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <button type="submit" class="btn btn-block btn-info">Submit</button>    
+        </form>
+    </div>
+</div>
+
+<script>
+    var Element = document.getElementById('id_profile_pic');
+    var img = document.getElementById('imagePreviewOne');
+    Element.addEventListener('change', function() {
+      var url = URL.createObjectURL(Element.files[0]);
+      img.src = url;
+      console.log(url);
+});
+</script>
+
+{% endblock %}

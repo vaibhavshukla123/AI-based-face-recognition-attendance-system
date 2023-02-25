@@ -151,6 +151,58 @@ def facultyProfile(request):
 
 
 
+
+
+
+def addStudent(request):
+    studentForm = CreateStudentForm()
+
+    if request.method == 'POST':
+        studentForm = CreateStudentForm(data = request.POST, files=request.FILES)
+        # print(request.POST)
+        stat = False 
+        try:
+            student = Student.objects.get(registration_id = request.POST['registration_id'])
+            stat = True
+        except:
+            stat = False
+        if studentForm.is_valid() and (stat == False):
+            studentForm.save()
+            name = studentForm.cleaned_data.get('firstname') +" " +studentForm.cleaned_data.get('lastname')
+            messages.success(request, 'Student ' + name + ' was successfully added.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Student with Registration Id '+request.POST['registration_id']+' already exists.')
+            return redirect('home')
+
+    context = {'studentForm':studentForm}
+    return render(request, 'attendence_sys/add_student.html', context)
+
+# def takeAttendance(request):
+    studentForm = CreateStudentForm()
+
+    if request.method == 'POST':
+        studentForm = CreateStudentForm(data = request.POST, files=request.FILES)
+        # print(request.POST)
+        stat = False 
+        try:
+            student = Student.objects.get(registration_id = request.POST['registration_id'])
+            stat = True
+        except:
+            stat = False
+        if studentForm.is_valid() and (stat == False):
+            studentForm.save()
+            name = studentForm.cleaned_data.get('firstname') +" " +studentForm.cleaned_data.get('lastname')
+            messages.success(request, 'Student ' + name + ' was successfully added.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Student with Registration Id '+request.POST['registration_id']+' already exists.')
+            return redirect('home')
+
+    context = {'studentForm':studentForm}
+    return render(request, 'attendence_sys/home.html', context)
+
+
 # class VideoCamera(object):
 #     def __init__(self):
 #         self.video = cv2.VideoCapture(0)

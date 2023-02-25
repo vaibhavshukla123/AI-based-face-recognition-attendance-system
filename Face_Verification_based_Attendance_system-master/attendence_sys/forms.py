@@ -10,6 +10,7 @@ class CreateStudentForm(ModelForm):
         super(CreateStudentForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['required'] = 'True'
     
 class FacultyForm(ModelForm):
     class Meta:

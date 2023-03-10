@@ -64,6 +64,7 @@ def logoutUser(request):
 
 @login_required(login_url = 'login')
 def updateStudentRedirect(request):
+
     context = {}
     if request.method == 'POST':
         try:
@@ -202,6 +203,21 @@ def addStudent(request):
     context = {'studentForm':studentForm}
     return render(request, 'attendance_sys/home.html', context)
 
+
+
+def studentUpdate(request):
+    context = {}
+    if request.method == 'POST':
+        try:
+            reg_id = request.POST['reg_id']
+            branch = request.POST['branch']
+            student = Student.objects.get(registration_id = reg_id, branch = branch)
+            updateStudentForm = CreateStudentForm(instance=student)
+            context = {'form':updateStudentForm, 'prev_reg_id':reg_id, 'student':student}
+        except:
+            messages.error(request, 'Student Not Found')
+            return redirect('home')
+    return render(request, 'attendance_sys/update_student.html', context)
 
 # class VideoCamera(object):
 #     def __init__(self):

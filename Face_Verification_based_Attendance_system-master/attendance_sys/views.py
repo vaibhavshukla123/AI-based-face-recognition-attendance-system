@@ -21,6 +21,8 @@ import numpy as np
 import cv2
 import os
 
+from django.http import JsonResponse
+
 
 names = []
 
@@ -116,33 +118,36 @@ def takeAttendance(request):
             }
         if Attendance.objects.filter(date = str(date.today()),branch = details['branch'], year = details['year'], section = details['section'],period = details['period']).count() != 0 :
             messages.error(request, "Attendance already recorded.")
-            return redirect('home')
+
+            return JsonResponse({'status':True,'message':'Already recorded', 'url': 'http://127.0.0.1:8000'})
+            # return redirect('home')
         else:
-            students = Student.objects.filter(branch = details['branch'], year = details['year'], section = details['section'])
-            # camera()
-            names = Recognizer(details)
-            for student in students:
-                if str(student.registration_id) in names:
-                    attendance = Attendance(Faculty_Name = request.user.faculty, 
-                    Student_ID = str(student.registration_id), 
-                    period = details['period'], 
-                    branch = details['branch'], 
-                    year = details['year'], 
-                    section = details['section'],
-                    status = 'Present')
-                    attendance.save()
-                else:
-                    attendance = Attendance(Faculty_Name = request.user.faculty, 
-                    Student_ID = str(student.registration_id), 
-                    period = details['period'],
-                    branch = details['branch'], 
-                    year = details['year'], 
-                    section = details['section'])
-                    attendance.save()
-            attendances = Attendance.objects.filter(date = str(date.today()),branch = details['branch'], year = details['year'], section = details['section'],period = details['period'])
-            context = {"attendances":attendances, "ta":True}
-            messages.success(request, "Attendance taking Success")
-            return render(request, 'attendance_sys/attendance.html', context)        
+            return JsonResponse({'status':True,'message':'Plese record', 'url': ''})
+            # students = Student.objects.filter(branch = details['branch'], year = details['year'], section = details['section'])
+            # # camera()
+            # names = Recognizer(details)
+            # for student in students:
+            #     if str(student.registration_id) in names:
+            #         attendance = Attendance(Faculty_Name = request.user.faculty, 
+            #         Student_ID = str(student.registration_id), 
+            #         period = details['period'], 
+            #         branch = details['branch'], 
+            #         year = details['year'], 
+            #         section = details['section'],
+            #         status = 'Present')
+            #         attendance.save()
+            #     else:
+            #         attendance = Attendance(Faculty_Name = request.user.faculty, 
+            #         Student_ID = str(student.registration_id), 
+            #         period = details['period'],
+            #         branch = details['branch'], 
+            #         year = details['year'], 
+            #         section = details['section'])
+            #         attendance.save()
+            # attendances = Attendance.objects.filter(date = str(date.today()),branch = details['branch'], year = details['year'], section = details['section'],period = details['period'])
+            # context = {"attendances":attendances, "ta":True}
+            # messages.success(request, "Attendance taking Success")
+            # return render(request, 'attendance_sys/attendance.html', context)        
     context = {}
     return render(request, 'attendance_sys/take_attendance.html', context)
 
@@ -248,7 +253,7 @@ def camera(request):
         return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
     except:
         pass
-    return render(request, 'app1.html')
+    # return render(request, 'app1.html')
 
 #to capture video class
 class VideoCamera(object):

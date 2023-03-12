@@ -59,6 +59,9 @@
 	</div>
 </div>
 {% else %}
+<div>
+	<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
+</div>
 	<center><h1>Present Period Attendance</h1></center>
 	<div class="row">
 		<div class="col-sm-12">
@@ -89,6 +92,7 @@
 			</div>
 		</div>
 	</div>
+	
 {% endif %}
 
 

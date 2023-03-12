@@ -15,6 +15,9 @@ urlpatterns = [
     path('updateStudent/', views.updateStudent, name='updateStudent'),
     path('studentUpdate/', views.studentUpdate, name='studentUpdate'),   #new
     path('attendance/', views.takeAttendance, name='attendance'),
+    path('camera/', views.camera, name='camera'),
+    path('saveAttendance/', views.saveAttendance, name='saveAttendance'),
+
     # path('video_feed/', views.videoFeed, name='video_feed'),
     # path('videoFeed/', views.getVideo, name='videoFeed'),
 ]

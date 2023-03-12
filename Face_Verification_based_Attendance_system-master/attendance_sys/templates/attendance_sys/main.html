@@ -15,9 +15,17 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<style>
-		body { color: #ccc }
+		body { color: #ccc ;
+			background-image: url('images/background.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+		
+		
+		}
 		.footer-widget p {
 			margin-bottom: 27px;
+			
+		
 		}
 		p {
 			font-family: 'Nunito', sans-serif;
@@ -100,7 +108,7 @@
 		  padding: 75px 0 0;
 		  background-color: #151414;
 		  position: relative;
-		  margin-top: 100px;
+		  margin-top: 500px;
 		  z-index: 2; }
 		  .dk-footer .contact-us {
 			margin-top: 0;
@@ -112,7 +120,6 @@
 			  margin-left: -80px; }
 		  .dk-footer .contact-icon i {
 			font-size: 24px;
-			top: -15px;
 			position: relative;
 			color:#007bff; }
 		
@@ -349,12 +356,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <footer id="dk-footer" class="dk-footer">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-lg-4">
                     <div class="dk-footer-box-info">
                         <a href="index.html" class="footer-logo">
-                            <img src="{% static 'images/logo.png' %}" alt="footer_logo" class="img-fluid">
+                            <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="footer_logo" class="img-fluid"></a>
                         </a>
                         <p class="footer-info-text">
                            This website offers attendance system which helps to School/College to take attendance efficiently.
@@ -392,87 +399,53 @@
                         <!-- End Social link -->
                     </div>
                     <!-- End Footer info -->
-                    <div class="footer-awarad">
-                        <img src="images/icon/best.png" alt="">
-                        <p>Best Design Company 2019</p>
-                    </div>
+                    
                 </div>
                 <!-- End Col -->
                 <div class="col-md-12 col-lg-8">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="contact-us">
-                                <div class="contact-icon">
-                                    <i class="fa fa-map-o" aria-hidden="true"></i>
-                                </div>
-                                <!-- End contact Icon -->
-                                <div class="contact-info">
-                                    <h3>MGITER</h3>
-                                    <p>NPE Campus Navsari</p>
-                                </div>
-                                <!-- End Contact Info -->
-                            </div>
+			
+						<div class="col-md-6 col-lg-6">
+							<div class="footer-widget footer-left-widget">
+								<div class="section-heading">
+									<h3>Useful Links</h3>
+									<span class="animate-border border-black"></span>
+								</div>
+								<ul>
+									<li>
+										<a href="{% url 'attendance' %}">Take attendance</a>
+									</li>
+									<li>
+										<a href="{% url 'addstudent' %}">Add student</a>
+									</li>
+									<li>
+										<a href="{% url 'studentUpdate' %}">Update Student Details</a>
+									</li>
+									<li>
+										<a href="{% url 'searchattendance' %}" >Search Attendance</a>
+									</li>
+								</ul>
+								
+							</div>
+							<!-- End Footer Widget -->
+						</div>
+								
+                        
+
+
+						<div class="col-md-4">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3727.1461703150235!2d72.89655261540118!3d20.906438097317597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0f76000948dc1%3A0x70650fb7759fdaa8!2sMahatma%20Gandhi%20Institute%20Of%20Technical%20Education%20And%20Research%20Center!5e0!3m2!1sen!2sin!4v1678627219393!5m2!1sen!2sin" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p>NPE Campus Navsari</p>
+									
                             <!-- End Contact Us -->
                         </div>
-                        <!-- End Col -->
-                        <div class="col-md-6">
-                            <div class="contact-us contact-us-last">
-                                <div class="contact-icon">
-                                    <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
-                                </div>
-                                <!-- End contact Icon -->
-                                <div class="contact-info">
-                                    <h3>8128210541</h3>
-                                    <p>Give us a call</p>
-                                </div>
-                                <!-- End Contact Info -->
-                            </div>
-                            <!-- End Contact Us -->
-                        </div>
-                        <!-- End Col -->
                     </div>
+					
                     <!-- End Contact Row -->
                     <div class="row">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="footer-widget footer-left-widget">
-                                <div class="section-heading">
-                                    <h3>Useful Links</h3>
-                                    <span class="animate-border border-black"></span>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <a href="{% url 'attendance' %}">Take attendance</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'addstudent' %}">Add student</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'studentUpdate' %}">Update Student Details</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'searchattendance' %}" >Search Attendance</a>
-                                    </li>
-                                </ul>
-                                {% comment %} <ul>
-                                    <li>
-                                        <a href="#">Contact us</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Testimonials</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Faq</a>
-                                    </li>
-                                </ul> {% endcomment %}
-                            </div>
-                            <!-- End Footer Widget -->
-                        </div>
+                        
                         <!-- End col -->
                         <div class="col-md-12 col-lg-6">
-                            <div class="footer-widget">
+                            <div class="footer-widget footer-left-widget">
                                 <div class="section-heading">
                                     <h3>Subscribe</h3>
                                     <span class="animate-border border-black"></span>
@@ -534,9 +507,10 @@
         <!-- End Copyright -->
         <!-- Back to top -->
         <div id="back-to-top" class="back-to-top">
-            <button class="btn btn-dark" title="Back to Top" style="display: block;">
+            <a href="#"><button class="btn btn-dark" title="Back to Top" style="display: block;">
                 <i class="fa fa-angle-up"></i>
             </button>
+		</a>
         </div>
         <!-- End Back to top -->
 </footer>

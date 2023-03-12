@@ -15,6 +15,15 @@ from .filters import AttendanceFilter
 from .recognizer import Recognizer
 from datetime import date
 
+
+import face_recognition
+import numpy as np
+import cv2
+import os
+
+
+names = []
+
 @login_required(login_url = 'login')
 def home(request):
     studentForm = CreateStudentForm()
@@ -110,6 +119,7 @@ def takeAttendance(request):
             return redirect('home')
         else:
             students = Student.objects.filter(branch = details['branch'], year = details['year'], section = details['section'])
+            # camera()
             names = Recognizer(details)
             for student in students:
                 if str(student.registration_id) in names:
@@ -219,6 +229,143 @@ def studentUpdate(request):
             return redirect('home')
     return render(request, 'attendance_sys/update_student.html', context)
 
+
+
+#new code
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import *
+from django.core.mail import EmailMessage
+from django.views.decorators import gzip
+from django.http import StreamingHttpResponse
+import cv2
+import threading
+
+@gzip.gzip_page
+def camera(request):
+    try:
+        cam = VideoCamera()
+        return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+    except:
+        pass
+    return render(request, 'app1.html')
+
+#to capture video class
+class VideoCamera(object):
+    def __init__(self):
+        self.video = cv2.VideoCapture(0)
+        (self.grabbed, self.frame) = self.video.read()
+        threading.Thread(target=self.update, args=()).start()
+
+    def __del__(self):
+        self.video.release()
+
+    def get_frame(self):
+        image = self.frame
+        _, jpeg = cv2.imencode('.jpg', image)
+        return jpeg.tobytes()
+
+    def update(self):
+        while True:
+            (self.grabbed, self.frame) = self.video.read()
+
+def gen(camera):
+    details = {
+        'branch':"CSE",
+        'year': 1,
+        'section':"A",
+        'period':1,
+        'faculty':"VENU GOPALKADAMBA"
+        }
+    known_face_encodings = []
+    known_face_names = []
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.getcwd()
+    image_dir = os.path.join(base_dir,"{}\{}\{}\{}\{}\{}".format('static','images','Student_Images',details['branch'],details['year'],details['section']))
+    
+    for root,dirs,files in os.walk(image_dir):
+        for file in files:
+            if file.endswith('jpg') or file.endswith('png'):
+                path = os.path.join(root, file)
+                img = face_recognition.load_image_file(path)
+                label = file[:len(file)-4]
+                img_encoding = face_recognition.face_encodings(img)[0]
+                known_face_names.append(label)
+                known_face_encodings.append(img_encoding)
+
+    face_locations = []
+    face_encodings = []
+
+    while True:
+        frame = camera.frame
+        check = camera.grabbed
+        small_frame = cv2.resize(frame, (0,0), fx=0.5, fy= 0.5)
+        rgb_small_frame = small_frame[:,:,::-1]
+
+        face_locations = face_recognition.face_locations(rgb_small_frame)
+        face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+        face_names = []
+
+
+        for face_encoding in face_encodings:
+
+            matches = face_recognition.compare_faces(known_face_encodings, np.array(face_encoding), tolerance = 0.6)
+
+            face_distances = face_recognition.face_distance(known_face_encodings,face_encoding)	
+            
+            try:
+                matches = face_recognition.compare_faces(known_face_encodings, np.array(face_encoding), tolerance = 0.6)
+
+                face_distances = face_recognition.face_distance(known_face_encodings,face_encoding)
+                best_match_index = np.argmin(face_distances)
+
+                if matches[best_match_index]:
+                    name = known_face_names[best_match_index]
+                    face_names.append(name)
+                    if name not in names:
+                        names.append(name)
+            except:
+                pass
+
+        if len(face_names) == 0:
+            for (top,right,bottom,left) in face_locations:
+                top*=2
+                right*=2
+                bottom*=2
+                left*=2
+
+                cv2.rectangle(frame, (left,top),(right,bottom), (0,0,255), 2)
+
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(frame, 'Unknown', (left, top), font, 0.8, (255,255,255),1)
+        else:
+            for (top,right,bottom,left), name in zip(face_locations, face_names):
+                top*=2
+                right*=2
+                bottom*=2
+                left*=2
+
+                cv2.rectangle(frame, (left,top),(right,bottom), (0,255,0), 2)
+
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(frame, name, (left, top), font, 0.8, (255,255,255),1)
+                print (name)
+        
+
+        _, jpeg = cv2.imencode('.jpg', frame)
+
+        # print ("names")
+        # print (names)
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n\r\n')
+
+        # return names
+    
+
+
+
+
+
 # class VideoCamera(object):
 #     def __init__(self):
 #         self.video = cv2.VideoCapture(0)
@@ -247,3 +394,39 @@ def studentUpdate(request):
 
 # def getVideo(request):
 #     return render(request, 'attendance_sys/videoFeed.html')
+
+
+def saveAttendance(request):
+    print("names")
+    print(names)
+    details = {
+        'branch':"CSE",
+        'year': 1,
+        'section':"A",
+        'period':1,
+        'faculty':"VENU GOPALKADAMBA"
+        }
+    students = Student.objects.filter(branch = details['branch'], year = details['year'], section = details['section'])
+    for student in students:
+        if str(student.registration_id) in names:
+            attendance = Attendance(Faculty_Name = request.user.faculty, 
+            Student_ID = str(student.registration_id), 
+            period = details['period'], 
+            branch = details['branch'], 
+            year = details['year'], 
+            section = details['section'],
+            status = 'Present')
+            attendance.save()
+        else:
+            attendance = Attendance(Faculty_Name = request.user.faculty, 
+            Student_ID = str(student.registration_id), 
+            period = details['period'],
+            branch = details['branch'], 
+            year = details['year'], 
+            section = details['section'])
+            attendance.save()
+    attendances = Attendance.objects.filter(date = str(date.today()),branch = details['branch'], year = details['year'], section = details['section'],period = details['period'])
+    context = {"attendances":attendances, "ta":True}
+    messages.success(request, "Attendance is taken successfully")
+    return render(request, 'attendance_sys/attendance.html', context) 
+   

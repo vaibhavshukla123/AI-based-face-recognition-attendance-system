@@ -3,9 +3,11 @@
 {% block content %}
 
 
+<div id="updatestudent">
+    <br><br>
+</div>
 
-
-<div class="col-md-6" style="margin-top: 20px;">
+<div class="col-md-6" style="margin-top: 20px; margin-left: 450px;">
     <div class="card card-body">
         <center><h3>Update Student Details</h3></center>
         <form class="form-horizontal" action="{% url 'updateStudentRedirect' %}" method="POST">
@@ -31,6 +33,10 @@
     </div>
 </div>
 
-
+<script>
+     $('html, body').animate({
+        scrollTop: $("#updatestudent").offset().top
+    }, 2000);
+</script>
 
 {% endblock %}

@@ -2,32 +2,76 @@
 
 
 <style>
+  
   .hello-msg{
     font-size: 18px;
     color: #fff;
     margin-right: 20px;
   }
-</style>
+  .bg-dark{
+    background-color: #000 !important;
+  }
+  .posabsolute{
+    position: absolute;
+    text-align: right;
+    right: 0px;
+  }
+ 
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
- <img src="{% static 'images/logo.png' %}" height="50px" width="250px">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <span class="nav-link">Hello, {{ request.user.faculty }}</span>
-      </li>
-      <li class="nav-item active">
-        <a href="{% url 'home' %}" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'account' %}">Account</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
+
+
+
+</style>
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" height="50px" width="250px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- new code -->
+  <br>
+  <div class="posabsolute">
+
+
+
+    <ul class="block-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="{% url 'attendance' %}">Take attendance</a></li>
+      <li><a href="{% url 'addstudent' %}">Add student</a></li>
+      <li><a href="{% url 'studentUpdate' %}" >Update student</a></li>
+      <li><a href="{% url 'searchattendance' %}"  >Search attendance</a></li>
+      <li><a href="{% url 'account' %}"  >Account</a></li>
+      <li><a href="{% url 'logout' %}"  >Logout</a></li>
+      
     </ul>
+      
   </div>
-</nav>
+    
+
+
+
+
+
+    
+
+
+
+
+  </nav>
+</div>
+
+
+<script>
+
+$('.block-menu').find('a').each(function(){
+
+var el = $(this),
+     elText = el.text();
+
+el.addClass("three-d");
+el.append('<span aria-hidden="true" class="three-d-box"><span class="front">'+elText+'</span><span class="back">'+elText+'</span></span>');
+
+
+});
+</script>

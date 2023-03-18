@@ -15,9 +15,24 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<style>
-		body { color: #ccc }
+		.no-gutters1 {
+			margin-right: 0;
+ 			margin-left: 0;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+			
+
+		}
+		body { color: #ccc ;
+			background-color: #000 !important;
+		
+		
+		
+		}
 		.footer-widget p {
 			margin-bottom: 27px;
+			
+		
 		}
 		p {
 			font-family: 'Nunito', sans-serif;
@@ -100,7 +115,7 @@
 		  padding: 75px 0 0;
 		  background-color: #151414;
 		  position: relative;
-		  margin-top: 100px;
+		  margin-top: 135px;
 		  z-index: 2; }
 		  .dk-footer .contact-us {
 			margin-top: 0;
@@ -112,7 +127,6 @@
 			  margin-left: -80px; }
 		  .dk-footer .contact-icon i {
 			font-size: 24px;
-			top: -15px;
 			position: relative;
 			color:#007bff; }
 		
@@ -327,14 +341,235 @@
 			  background: #FA6742;
 			  border-color: #FA6742; }
 
+		
+		/* New code */
+		
+
+		/* .container {
+		max-width: 60em;
+		margin: 0 auto;
+		} */
+
+		a {
+		color: #fc0;
+		}
+
+		/* basic menu styles */
+		.block-menu {
+			display: block;
+			background: #000000;
+			margin-top: 2px;
+		}
+
+		.block-menu li {
+			display: inline-block;
+		}
+
+		.block-menu li a {
+			color: #fff;
+			display: block;
+			text-decoration: none;
+			font-family: 'Passion One', Arial, sans-serif;
+			font-smoothing: antialiased;
+			text-transform: uppercase;
+			overflow: visible;
+			line-height: 20px;
+			font-size: 24px;
+			padding: 15px 10px;
+		}
+
+		/* animation domination */
+		.three-d {
+			perspective: 200px;
+			transition: all .07s linear;
+			position: relative;
+			cursor: pointer;
+		}
+			/* complete the animation! */
+			.three-d:hover .three-d-box, 
+			.three-d:focus .three-d-box {
+				transform: translateZ(-25px) rotateX(90deg);
+			}
+
+		.three-d-box {
+			transition: all .3s ease-out;
+			transform: translatez(-25px);
+			transform-style: preserve-3d;
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+
+		/* 
+			put the "front" and "back" elements into place with CSS transforms, 
+			specifically translation and translatez
+		*/
+		.front {
+			transform: rotatex(0deg) translatez(25px);
+		}
+
+		.back {
+			transform: rotatex(-90deg) translatez(25px);
+			color: #ffe7c4;
+		}
+
+		.front, .back {
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: rgb(0, 0, 0);
+			padding: 15px 10px;
+			color: white;
+			pointer-events: none;
+			box-sizing: border-box;
+		}
+		
+
+		.back {
+		background: #ff0000;
+		}
+		/* new code :end */
+		/* new code 1 */
+		a,p,h1,h2,h3,h4,ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		.section-services {
+			padding-top: 110px;
+			padding-bottom: 120px;
+			font-family: "Poppins", sans-serif;
+			background-color: #211f24;
+			color: #fff;
+		}
+
+		.section-services .header-section {
+			margin-bottom: 35px;
+		}
+
+		.section-services .header-section .title {
+			position: relative;
+			margin-bottom: 40px;
+			padding-bottom: 25px;
+			text-transform: uppercase;
+			font-weight: 700;
+		}
+
+		.section-services .header-section .title:before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 140px;
+			height: 1px;
+			background-color: #FF0000;
+		}
+
+		.section-services .header-section .title:after {
+			content: "";
+			position: absolute;
+			bottom: -1px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 45px;
+			height: 3px;
+			background-color: #f70037;
+		}
+
+		.section-services .header-section .title span {
+			color: #f70037;
+		}
+
+		.section-services .header-section .description {
+			color: #6f6f71;
+		}
+
+		.section-services .single-service {
+			margin-top: 40px;
+			background-color: #24252a;
+			box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+		}
+
+		.section-services .single-service .part-1 {
+			padding: 40px 40px 25px;
+			border-bottom: 2px solid #1d1e23;
+		}
+
+		.section-services .single-service .part-1 i {
+			margin-bottom: 25px;
+			font-size: 50px;
+			color: #f70037;
+		}
+
+		.section-services .single-service .part-1 .title {
+			font-size: 17px;
+			font-weight: 700;
+			letter-spacing: 0.02em;
+			line-height: 1.8em;
+		}
+
+		.section-services .single-service .part-2 {
+			padding: 30px 40px 40px;
+		}
+
+		.section-services .single-service .part-2 .description {
+			margin-bottom: 22px;
+			color: #6f6f71;
+			font-size: 14px;
+			line-height: 1.8em;
+		}
+
+		.section-services .single-service .part-2 a {
+			color: #fff;
+			font-size: 14px;
+			text-decoration: none;
+		}
+
+		.section-services .single-service .part-2 a i {
+			margin-right: 10px;
+			color: #f70037;
+		}
+		
+		.single-service{
+			transition: 1s;
+		}
+
+		.single-service:hover{
+		transform: scale(1.1);
+		background: #ff800a;
+		z-index: 2;
+		box-shadow: 2px 2px 2px #000;
+		
+	}
+	.fontwhite{
+		color: white;
+	}
+
+
+
+
+
+
 	</style>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
 </head>
 <body>
 	{%  include 'attendance_sys/navbar.html' %}
 	<br>
 <br>
 <br>
-	<div class="container-fluid">
+	<div class="container-fluid no-gutters1">
+		<img src="{% static 'images/background.png' %}" width="100%">
+
 	{% block content %}
 
 	{% endblock %}
@@ -349,12 +584,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <footer id="dk-footer" class="dk-footer">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-lg-4">
                     <div class="dk-footer-box-info">
                         <a href="index.html" class="footer-logo">
-                            <img src="{% static 'images/logo.png' %}" alt="footer_logo" class="img-fluid">
+                            <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="footer_logo" class="img-fluid"></a>
                         </a>
                         <p class="footer-info-text">
                            This website offers attendance system which helps to School/College to take attendance efficiently.
@@ -392,87 +627,53 @@
                         <!-- End Social link -->
                     </div>
                     <!-- End Footer info -->
-                    <div class="footer-awarad">
-                        <img src="images/icon/best.png" alt="">
-                        <p>Best Design Company 2019</p>
-                    </div>
+                    
                 </div>
                 <!-- End Col -->
                 <div class="col-md-12 col-lg-8">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="contact-us">
-                                <div class="contact-icon">
-                                    <i class="fa fa-map-o" aria-hidden="true"></i>
-                                </div>
-                                <!-- End contact Icon -->
-                                <div class="contact-info">
-                                    <h3>MGITER</h3>
-                                    <p>NPE Campus Navsari</p>
-                                </div>
-                                <!-- End Contact Info -->
-                            </div>
+			
+						<div class="col-md-6 col-lg-6">
+							<div class="footer-widget footer-left-widget">
+								<div class="section-heading">
+									<h3>Useful Links</h3>
+									<span class="animate-border border-black"></span>
+								</div>
+								<ul>
+									<li>
+										<a href="{% url 'attendance' %}">Take attendance</a>
+									</li>
+									<li>
+										<a href="{% url 'addstudent' %}">Add student</a>
+									</li>
+									<li>
+										<a href="{% url 'studentUpdate' %}">Update Student Details</a>
+									</li>
+									<li>
+										<a href="{% url 'searchattendance' %}" >Search Attendance</a>
+									</li>
+								</ul>
+								
+							</div>
+							<!-- End Footer Widget -->
+						</div>
+								
+                        
+
+
+						<div class="col-md-4">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3727.1461703150235!2d72.89655261540118!3d20.906438097317597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0f76000948dc1%3A0x70650fb7759fdaa8!2sMahatma%20Gandhi%20Institute%20Of%20Technical%20Education%20And%20Research%20Center!5e0!3m2!1sen!2sin!4v1678627219393!5m2!1sen!2sin" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><p>NPE Campus Navsari</p>
+									
                             <!-- End Contact Us -->
                         </div>
-                        <!-- End Col -->
-                        <div class="col-md-6">
-                            <div class="contact-us contact-us-last">
-                                <div class="contact-icon">
-                                    <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
-                                </div>
-                                <!-- End contact Icon -->
-                                <div class="contact-info">
-                                    <h3>8128210541</h3>
-                                    <p>Give us a call</p>
-                                </div>
-                                <!-- End Contact Info -->
-                            </div>
-                            <!-- End Contact Us -->
-                        </div>
-                        <!-- End Col -->
                     </div>
+					
                     <!-- End Contact Row -->
                     <div class="row">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="footer-widget footer-left-widget">
-                                <div class="section-heading">
-                                    <h3>Useful Links</h3>
-                                    <span class="animate-border border-black"></span>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <a href="{% url 'attendance' %}">Take attendance</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'addstudent' %}">Add student</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'studentUpdate' %}">Update Student Details</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'searchattendance' %}" >Search Attendance</a>
-                                    </li>
-                                </ul>
-                                {% comment %} <ul>
-                                    <li>
-                                        <a href="#">Contact us</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Testimonials</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Faq</a>
-                                    </li>
-                                </ul> {% endcomment %}
-                            </div>
-                            <!-- End Footer Widget -->
-                        </div>
+                        
                         <!-- End col -->
                         <div class="col-md-12 col-lg-6">
-                            <div class="footer-widget">
+                            <div class="footer-widget footer-left-widget">
                                 <div class="section-heading">
                                     <h3>Subscribe</h3>
                                     <span class="animate-border border-black"></span>
@@ -534,9 +735,10 @@
         <!-- End Copyright -->
         <!-- Back to top -->
         <div id="back-to-top" class="back-to-top">
-            <button class="btn btn-dark" title="Back to Top" style="display: block;">
+            <a href="#"><button class="btn btn-dark" title="Back to Top" style="display: block;">
                 <i class="fa fa-angle-up"></i>
             </button>
+		</a>
         </div>
         <!-- End Back to top -->
 </footer>

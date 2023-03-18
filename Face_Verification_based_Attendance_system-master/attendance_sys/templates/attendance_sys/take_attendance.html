@@ -2,11 +2,13 @@
 
 {% block content %}
 
-
-<div class="col-md-6" style="margin-top: 20px;">
+<div id="takeattendance">
+    <br><br>
+</div>
+<div class="col-md-6" style="margin-top: 20px; margin-left: 450px;">
     <div class="card card-body">
         <center><h3>Take Attendance</h3></center>
-        <form class="form-horizontal" action="{% url 'attendance' %}" method="POST">
+        <form class="form-horizontal" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="sel1">Select Branch:</label>
@@ -49,10 +51,68 @@
                     <option value="7">7</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-block btn-info">Take Attendance</button>
+            <button type="button" onClick="formsbt()" class="btn btn-block btn-info">Take Attendance</button>
         </form>
+        <button type="button" onClick="reset()" class="btn btn-block btn-info">Reset</button>
+            <div id="captureblock" style="display:none;">
+                <button type="button" onClick="Capture()" class="btn btn-block btn-info">Capture</button>
+                <a href="{% url 'saveAttendance' %}">Save</a>
+            </div>
+
+
+            <embed src="http://127.0.0.1:8000/attendance/" style="width:500px; height: 300px;">
+
     </div>
 </div>
+
+<script>
+    let url = '{% url 'attendance' %}';
+    function submit1() {
+        var data = $('form').serialize();
+        $.post(url, data);
+    }
+    function reset() {
+        $("form :input").prop("disabled", false);
+        $('#captureblock').css('display', 'none')
+    }
+
+
+    function formsbt() {
+        var data = $('form').serialize();
+        $.post(url, data) .then(function (response) {
+            if(response.status == true && response.url.length > 0) {
+               window.open(response.url,'_self');
+            } else {
+                $("form :input").prop("disabled", true);
+
+                $('#captureblock').css('display', 'block')
+            }
+          });
+    }
+
+
+    function Capture () {
+        var left = (screen.width/2)-(700/2);
+        var top = (screen.height/2)-(500/2);
+        w=700;
+        h=500;
+        newwindow=window.open('http://127.0.0.1:8000/camera','Selfi','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+        if (window.focus) {newwindow.focus()}
+        return false;
+    }
+
+    
+    $('html, body').animate({
+        scrollTop: $("#takeattendance").offset().top
+    }, 2000);
+
+
+
+
+
+
+    
+</script>
 
 
 

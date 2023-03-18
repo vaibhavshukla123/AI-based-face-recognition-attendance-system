@@ -12,7 +12,12 @@
         {% endif %}
 	{% endfor %}
 {% if ta == False %}
-<center><h1>Search Attendance</h1></center>
+<div id="searchattendance">
+    <br><br><br><br>
+</div>
+
+
+<center><h1 class="fontwhite">Search Attendance</h1></center>
 <div class="row">
 	<div class="col">
 		<div class="card card-body">
@@ -20,6 +25,7 @@
 			<center>
 				<form method="get">
 					{{myFilter.form}}
+					<br>
 
 		    		<button class="btn btn-primary" type="submit">Search</button>
 				</form>
@@ -59,7 +65,10 @@
 	</div>
 </div>
 {% else %}
-	<center><h1>Present Period Attendance</h1></center>
+<div>
+	<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Home</a>
+</div>
+	<center><h1 class="fontwhite">Present Period Attendance</h1></center>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="card card-body">
@@ -89,7 +98,16 @@
 			</div>
 		</div>
 	</div>
+	
+
+
+
 {% endif %}
 
+<script>
+	$('html, body').animate({
+		scrollTop: $("#searchattendance").offset().top
+	}, 2000);
+</script>
 
 {% endblock %}

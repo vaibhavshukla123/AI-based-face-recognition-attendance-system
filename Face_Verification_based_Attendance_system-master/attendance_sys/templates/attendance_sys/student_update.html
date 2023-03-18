@@ -14,7 +14,11 @@
     right: 19px;
     }
 </style>
-    <div class="container">
+<div id="updatestudent">
+    <br><br>
+</div>
+
+    <div class="container" >
         <div class="row">
             <div class="col-md-3">
                 <div class="card card-body">
@@ -36,5 +40,11 @@
             </div>
         </div>
     </div>
+
+<script>
+    $('html, body').animate({
+        scrollTop: $("#updatestudent").offset().top
+    }, 2000);
+</script>
 
 {% endblock %}

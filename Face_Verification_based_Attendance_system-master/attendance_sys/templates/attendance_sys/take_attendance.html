@@ -2,8 +2,10 @@
 
 {% block content %}
 
-
-<div class="col-md-6" style="margin-top: 20px;">
+<div id="takeattendance">
+    <br><br>
+</div>
+<div class="col-md-6" style="margin-top: 20px; margin-left: 450px;">
     <div class="card card-body">
         <center><h3>Take Attendance</h3></center>
         <form class="form-horizontal" method="POST">
@@ -99,21 +101,10 @@
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    $('html, body').animate({
+        scrollTop: $("#takeattendance").offset().top
+    }, 2000);
 
 
 

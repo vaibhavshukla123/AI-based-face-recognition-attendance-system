@@ -2,9 +2,11 @@
 
 {% block content %}
 
-
-<div class="col-md-6" style="margin-top: 20px;">
-    <div class="card card-body">
+<div id="addstudent">
+<br><br>
+</div>
+<div class="col-md-6" style="margin-top: 20px; margin-left: 450px;" >
+    <div class="card card-body" >
         <center><h3>Add Student</h3></center>
         <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -59,7 +61,7 @@
                     </div>
                 {% comment %} <div>
                     {%if student.profile_pic %} {% endcomment %}
-                    <h1>Test</h1>
+                    
                     <img id="imagePreviewOne" thumbnail src=""/>
                     {% comment %} <img src="{{student.profile_pic.url}}"> {% endcomment %}
                     {% comment %} {%endif%} {% endcomment %}
@@ -79,6 +81,13 @@
       img.src = url;
       console.log(url);
 });
+
+
+
+
+$('html, body').animate({
+        scrollTop: $("#addstudent").offset().top
+    }, 2000);
 </script>
 
 {% endblock %}
